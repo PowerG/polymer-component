@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
-<polymer-element name="openmrs-location">
+<link rel="import" href="elements/openmrs-allLocations.html">
+<polymer-element name="openmrs-location" attributes="posts">
     <template>
         <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
         <style>
@@ -17,8 +18,33 @@
             <span>HELLO</span>
             <i class="fa fa-caret-down link"></i>
         </a>
+
+
+        <core-ajax id="ajax"
+        auto
+        url="http://localhost:8080/openmrs/ws/rest/v1/location"
+        handleAs="json"
+        response ="{{locations}}">
+        </core-ajax>
+
+     
+
+        <template repeat="{{location in locations}}" >
+            
+            <openmrs-allLocations loc="{{location}}" ></openmrs-allLocations>
+
+        </template>
+
     </template>
     <script>
-        Polymer("openmrs-location", {});
+        Polymer("openmrs-location", {
+            locations: [],
+            ready: function(){
+            
+            }
+
+        })
+
+        
     </script>
 </polymer-element>
